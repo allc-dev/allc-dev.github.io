@@ -1,36 +1,86 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Reveal animations on scroll
-    const observerOptions = {
-        threshold: 0.1
-    };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+    // ── Sticky Header ──────────────────────────────────────────────────
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Scroll Reveal ──────────────────────────────────────────────────
+    const revealTargets = [
+        '.hero-badge', '.hero-logo-wrap', '.hero h1', '.hero-sub', '.cta-row',
+        '.service-card', '.apps-text', '.apps-visual',
+        '.pillar', '.section-header',
+    ];
+
+    revealTargets.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => el.classList.add('reveal'));
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                // Stagger siblings
+                const siblings = [...entry.target.parentElement.querySelectorAll('.reveal')];
+                const idx = siblings.indexOf(entry.target);
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, idx * 80);
+                revealObserver.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    const featureCards = document.querySelectorAll('.feature-card');
-    featureCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        observer.observe(card);
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Hero Logo Parallax (mouse) ─────────────────────────────────────
+    const heroLogo = document.getElementById('hero-logo');
+    if (heroLogo) {
+        let raf = null;
+        document.addEventListener('mousemove', (e) => {
+            if (raf) cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(() => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 18;
+                const y = (e.clientY / window.innerHeight - 0.5) * 12;
+                heroLogo.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    }
+
+    // ── Smooth scroll for anchor links ────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
     });
 
-    // Subtle parallax effect for hero logo
-    document.addEventListener('mousemove', (e) => {
-        const logo = document.querySelector('.hero-logo');
-        if (!logo) return;
-        
-        const mouseX = e.clientX / window.innerWidth - 0.5;
-        const mouseY = e.clientY / window.innerHeight - 0.5;
-        
-        logo.style.transform = `scale(1) translate(${mouseX * 20}px, ${mouseY * 20}px)`;
-    });
+    // ── Mobile menu toggle ────────────────────────────────────────────
+    const menuBtn = document.getElementById('menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+            const isOpen = navLinks.style.display === 'flex';
+            navLinks.style.display = isOpen ? 'none' : 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '70px';
+            navLinks.style.right = '2rem';
+            navLinks.style.background = 'hsl(22, 15%, 7%)';
+            navLinks.style.border = '1px solid hsla(43, 40%, 60%, 0.12)';
+            navLinks.style.borderRadius = '16px';
+            navLinks.style.padding = '1rem';
+            navLinks.style.gap = '0.25rem';
+        });
+    }
 
-    console.log('%c ALLC.DEV %c Construindo o futuro.', 'background: #d4af37; color: #000; font-weight: bold; padding: 4px 8px; border-radius: 4px;', 'color: #d4af37; font-weight: bold;');
+    // ── Console easter egg ─────────────────────────────────────────────
+    console.log(
+        '%c ALLC.DEV %c Fábrica de Software & Loja de Apps',
+        'background:#c9963a;color:#000;font-weight:900;padding:4px 10px;border-radius:4px;letter-spacing:1px;',
+        'color:#c9963a;font-weight:600;'
+    );
 });
