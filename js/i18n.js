@@ -57,7 +57,8 @@ const translations = {
     "app_quietude": "Set the mood with your own mix of ambient sounds.",
     "app_nexus": "Small challenges for memory, attention and logic.",
     "app_biblia": "Read, highlight and make time for the Bible.",
-    "app_bookquest": "A daily Bible quiz, with reading along the way."
+    "app_bookquest": "A daily Bible quiz, with reading along the way.",
+    "whatsapp_role": "Talk directly with André"
   },
   "pt": {
     "nav_apps": "Aplicativos",
@@ -116,6 +117,7 @@ const translations = {
     "app_quietude": "Crie seu ambiente com uma mistura de sons.",
     "app_nexus": "Pequenos desafios de memória, atenção e lógica.",
     "app_biblia": "Leia, marque e reserve um tempo para a Bíblia.",
-    "app_bookquest": "Um quiz bíblico diário, com leitura pelo caminho."
+    "app_bookquest": "Um quiz bíblico diário, com leitura pelo caminho.",
+    "whatsapp_role": "Converse diretamente com o André"
   }
 };

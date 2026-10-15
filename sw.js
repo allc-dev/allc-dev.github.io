@@ -3,7 +3,7 @@
  * Incremente CACHE_VERSION a cada deploy que altere CSS/JS/imagens.
  */
 
-const CACHE_VERSION = "allc-jade-v2";
+const CACHE_VERSION = "allc-jade-v3";
 
 const PRECACHE = [
   "/",
