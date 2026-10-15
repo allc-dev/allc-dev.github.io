@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://allc.dev/sitemap.xml

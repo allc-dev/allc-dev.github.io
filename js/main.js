@@ -1,142 +1,36 @@
-/**
- * ALLC Dev - Main Application Logic
- */
-
-document.addEventListener("DOMContentLoaded", () => {
-  // --- 1. i18n Language Management ---
-  // Storage pode lançar exceção em navegação privada restrita
-  let savedLang = null;
-  try { savedLang = localStorage.getItem("allc_lang"); } catch (e) {}
-  let currentLang = savedLang || (navigator.language && navigator.language.startsWith("pt") ? "pt" : "en");
-
-  function setLanguage(lang) {
-    if (!translations[lang]) lang = "en";
-    currentLang = lang;
-    try { localStorage.setItem("allc_lang", lang); } catch (e) {}
-
-    // Update HTML lang attribute
-    document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
-
-    // Update all translatable elements
-    document.querySelectorAll("[data-i18n]").forEach((el) => {
-      const key = el.getAttribute("data-i18n");
-      if (translations[lang] && translations[lang][key]) {
-        if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
-          el.placeholder = translations[lang][key];
-        } else {
-          el.textContent = translations[lang][key];
-        }
-      }
+// Idioma do navegador como padrão; escolha manual tem prioridade.
+(() => {
+  const languageKey = 'allc_lang';
+  function applyLanguage(language, remember = false) {
+    const lang = language === 'pt' ? 'pt' : 'en';
+    const copy = translations[lang];
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+      const text = copy[element.dataset.i18n];
+      if (text) element.textContent = text;
     });
-
-    // Update active button state in language switcher
-    document.querySelectorAll(".lang-btn").forEach((btn) => {
-      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+    document.querySelectorAll('[data-language]').forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.language === lang));
     });
+    document.querySelectorAll('[data-label]').forEach(element => element.setAttribute('aria-label', copy[element.dataset.label]));
+    if (!document.body.dataset.app) document.title = copy.page_title;
+    document.querySelector('meta[name="description"]').content = document.body.dataset.app ? copy['app_' + document.body.dataset.app] : copy.intro;
+    if (remember) { try { localStorage.setItem(languageKey, lang); } catch (_) {} }
+    document.documentElement.classList.remove('i18n-pending');
   }
-
-  // Setup language button listeners
-  document.querySelectorAll(".lang-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const lang = btn.getAttribute("data-lang");
-      setLanguage(lang);
-    });
+  let stored;
+  try { stored = localStorage.getItem(languageKey); } catch (_) {}
+  const browserLang = (navigator.language || '').toLowerCase().startsWith('pt') ? 'pt' : 'en';
+  applyLanguage(['pt', 'en'].includes(stored) ? stored : browserLang);
+  document.querySelectorAll('[data-language]').forEach(button => button.addEventListener('click', () => applyLanguage(button.dataset.language, true)));
+  const toggle = document.querySelector('.mobile-toggle');
+  const navigation = document.querySelector('#navigation');
+  function closeMenu() { toggle.setAttribute('aria-expanded', 'false'); navigation.classList.remove('open'); }
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open)); navigation.classList.toggle('open', open);
   });
-
-  // Initial language setup
-  setLanguage(currentLang);
-  document.documentElement.classList.remove("i18n-pending");
-
-  // --- 2. Mobile Navigation Toggle ---
-  const mobileToggle = document.querySelector(".mobile-toggle");
-  const navMenu = document.querySelector(".nav-links");
-
-  if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("open");
-      mobileToggle.classList.toggle("open");
-    });
-
-    // Close menu when clicking any link
-    navMenu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navMenu.classList.remove("open");
-        mobileToggle.classList.remove("open");
-      });
-    });
-  }
-
-  // --- 3. Header Scrolled State ---
-  const header = document.querySelector(".header");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 40) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
-  });
-
-  // --- 4. Contact Form Submissions ---
-  window.sendContactEmail = function () {
-    const name = document.getElementById("form-name").value.trim();
-    const email = document.getElementById("form-email").value.trim();
-    const subject = document.getElementById("form-subject").value.trim();
-    const message = document.getElementById("form-message").value.trim();
-
-    if (!name || !email || !message) {
-      alert(currentLang === "pt" ? "Por favor, preencha nome, e-mail e mensagem." : "Please fill in name, email, and message.");
-      return;
-    }
-
-    const sub = encodeURIComponent(subject ? `${subject} - Contato via allc.dev` : `Contato via allc.dev de ${name}`);
-    const body = encodeURIComponent(
-      `Nome / Name: ${name}\n` +
-      `E-mail: ${email}\n\n` +
-      `Mensagem / Message:\n${message}\n\n` +
-      `--\nEnviado através de apps.allc.dev / allc-dev.github.io`
-    );
-
-    window.location.href = `mailto:allc.dev@outlook.com?subject=${sub}&body=${body}`;
-  };
-
-  window.sendContactWhatsApp = function () {
-    const name = document.getElementById("form-name").value.trim();
-    const message = document.getElementById("form-message").value.trim();
-
-    let text = `Olá, André! 👋\n\n`;
-    if (name) text += `*Nome:* ${name}\n`;
-    if (message) text += `*Mensagem:*\n${message}\n`;
-    text += `\n_Contato enviado através de apps.allc.dev_ 🌐`;
-
-    const encoded = encodeURIComponent(text);
-    window.open(`https://api.whatsapp.com/send?phone=5512988543055&text=${encoded}`, "_blank");
-  };
-
-  // --- 5. PWA: Service Worker & Install Prompt ---
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/sw.js").catch(() => {});
-  }
-
-  const installBtn = document.querySelector(".install-btn");
-  let deferredPrompt = null;
-
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    if (installBtn) installBtn.hidden = false;
-  });
-
-  if (installBtn) {
-    installBtn.addEventListener("click", async () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      await deferredPrompt.userChoice;
-      deferredPrompt = null;
-      installBtn.hidden = true;
-    });
-  }
-
-  window.addEventListener("appinstalled", () => {
-    if (installBtn) installBtn.hidden = true;
-  });
-});
+  navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeMenu(); } });
+  if ('serviceWorker' in navigator && ['http:', 'https:'].includes(location.protocol)) navigator.serviceWorker.register('/sw.js').catch(() => {});
+})();

@@ -1,45 +1,33 @@
-# allc-dev.github.io
+# allc.dev
 
-Site institucional de **André Costa · ALLC Dev**: arquitetura de software corporativo e vitrine dos 11 apps do ecossistema ALLC Apps na Google Play.
+Site de André Costa, desenvolvedor solo dos apps allc.dev. Identidade Jade,
+HTML/CSS/JavaScript sem build, dependências ou fontes remotas.
 
-- Site: https://allc-dev.github.io/
-- Política de privacidade dos apps: https://allc-dev.github.io/privacy-policy.html
+- https://allc.dev — site, catálogo e suporte.
+- https://apps.allc.dev — redirecionamento existente para a loja Google Play.
+- https://github.com/allc-dev — perfil e projetos.
+- https://www.youtube.com/@allc-dev — demonstrações e novidades.
 
-## Stack
+## Rodar
 
-HTML, CSS e JavaScript puros, sem build. Publicado pelo GitHub Pages a partir do `master`.
+`python -m http.server 8765` na raiz, abrir http://localhost:8765.
 
-- Bilíngue PT/EN em uma única página: textos marcados com `data-i18n` e traduzidos por `js/i18n.js`. O idioma vem do navegador ou da escolha salva no `localStorage`.
-- PWA instalável no celular: `site.webmanifest` + service worker `sw.js` (abre offline).
+## Estrutura e manutenção
 
-## Estrutura
+index.html contém apresentação, catálogo dos 11 apps, autor, ALLC PRO e links.
+apps/<app>/index.html contém produto, download pelo pacote publicado, capturas
+e link de vídeo quando já disponível. privacy-policy.html e app-ads.txt são
+preservados. css/modern.css define Jade e breakpoints; js/i18n.js contém PT/EN.
+js/main.js aplica português para navegador pt*, inglês para qualquer outro;
+a escolha manual EN/PT é salva em allc_lang e tem prioridade. A detecção
+automática não grava preferência. Menu móvel com aria-expanded e Escape.
 
-| Caminho | Conteúdo |
-| --- | --- |
-| `index.html` | Página principal |
-| `privacy-policy.html` | Política de privacidade (autocontida) |
-| `css/modern.css` | Estilos e breakpoints mobile |
-| `js/i18n.js` | Dicionário de traduções PT/EN |
-| `js/main.js` | Idioma, menu mobile, formulário de contato, registro do PWA |
-| `sw.js` | Service worker: cache dos arquivos estáticos |
-| `site.webmanifest` | Manifesto do PWA (nome, cores, ícones) |
-| `imagens/` | Logo, favicons e ícones do PWA (inclui `maskable-512x512.png`) |
-| `app-ads.txt` | Verificação de anúncios dos apps |
-| `redirect.html` | Redireciona para o GitHub do perfil |
+site.webmanifest mantém a identidade instalável. sw.js tem cache versionado:
+aumentar CACHE_VERSION ao mudar estáticos. Página via rede primeiro; cache
+para visitas offline. Cards/imagens não visitados não têm garantia offline.
+Sitemap, robots e canonical usam allc.dev. A configuração do domínio é
+externa ao repositório; não criar CNAME sem confirmar a hospedagem.
 
-## Rodando localmente
-
-O service worker não funciona via `file://`; use um servidor:
-
-```bash
-python -m http.server 8765
-# abra http://localhost:8765
-```
-
-## Manutenção
-
-- **Texto novo:** adicione `data-i18n="chave"` no HTML e a chave nos blocos `pt` e `en` de `js/i18n.js`.
-- **Deploy que altera CSS, JS ou imagens:** incremente `CACHE_VERSION` em `sw.js` (`allc-v1` → `allc-v2`). Sem isso, quem já visitou continua vendo a versão antiga em cache.
-- **Arquivo novo que deva abrir offline:** inclua o caminho na lista `PRECACHE` de `sw.js`.
-- **Ícones:** gerados a partir de uma arte 512×512; o maskable tem margem de ~10% para o recorte circular do Android.
-- **Instalabilidade:** confira em DevTools → Application → Manifest.
+imagens/brand contém banner SVG e PNG social; avatar original preservado.
+Fontes: Segoe UI, Roboto, Arial, sans-serif, sem download obrigatório.
+GitHub Pages publica master; commit/push somente com ordem do allc.
