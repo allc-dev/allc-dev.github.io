@@ -4,8 +4,36 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>André Costa · ALLC Dev | Software Architect & Mobile Products</title>
-  <meta name="description" content="Software Architect & Mobile Product Engineer. Over 25 years designing mission-critical enterprise systems and crafting the independent ALLC Apps ecosystem." />
+  <meta name="description" content="Arquiteto de software e engenheiro de produtos mobile. Mais de 25 anos em sistemas corporativos de missão crítica e o ecossistema independente ALLC Apps." />
   <meta name="author" content="André Costa (allc-dev)" />
+  <meta name="theme-color" content="#0a0d14" />
+  <link rel="canonical" href="https://allc-dev.github.io/" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://allc-dev.github.io/" />
+  <meta property="og:site_name" content="ALLC Dev" />
+  <meta property="og:title" content="André Costa · ALLC Dev" />
+  <meta property="og:description" content="Arquitetura de software corporativo e 11 apps independentes na Google Play." />
+  <meta property="og:image" content="https://allc-dev.github.io/imagens/android-chrome-512x512.png" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta name="twitter:card" content="summary" />
+
+  <!-- Aplica o idioma antes da pintura para evitar o flash de PT -->
+  <script>
+    (function () {
+      var lang;
+      try { lang = localStorage.getItem("allc_lang"); } catch (e) {}
+      if (!lang) lang = (navigator.language || "").indexOf("pt") === 0 ? "pt" : "en";
+      if (lang !== "pt") {
+        document.documentElement.classList.add("i18n-pending");
+        // Fallback: nunca deixa a página oculta se o main.js falhar
+        setTimeout(function () { document.documentElement.classList.remove("i18n-pending"); }, 1500);
+      }
+    })();
+  </script>
+  <style>.i18n-pending body { visibility: hidden; }</style>
 
   <!-- Favicons -->
   <link rel="icon" type="image/x-icon" href="imagens/favicon.ico" />
@@ -50,8 +78,12 @@
           <button class="lang-btn" data-lang="en">EN</button>
         </div>
 
+        <button class="btn btn-outline install-btn" hidden style="padding: 8px 14px; font-size: 0.85rem;">
+          <i class="fas fa-download"></i> <span class="nav-play-label" data-i18n="nav_install">Instalar</span>
+        </button>
+
         <a href="https://apps.allc.dev" target="_blank" class="btn btn-green" style="padding: 8px 16px; font-size: 0.85rem;">
-          <i class="fab fa-google-play"></i> <span data-i18n="nav_play_store">Google Play</span>
+          <i class="fab fa-google-play"></i> <span class="nav-play-label" data-i18n="nav_play_store">Google Play</span>
         </a>
 
         <button class="mobile-toggle" aria-label="Abrir Menu">
@@ -372,10 +404,10 @@
           <h4 data-i18n="stack_desktop">Corporativo & Desktop</h4>
           <div class="stack-tags">
             <span class="tag">Delphi</span>
-            <span class="tag">Automação Comercial</span>
+            <span class="tag" data-i18n="tag_retail">Automação Comercial</span>
             <span class="tag">TEF / Pinpads</span>
             <span class="tag">NFC-e / NF-e</span>
-            <span class="tag">Concentradores</span>
+            <span class="tag" data-i18n="tag_hubs">Concentradores</span>
           </div>
         </div>
 
@@ -386,7 +418,7 @@
             <span class="tag">Git / GitHub Actions</span>
             <span class="tag">Google ML Kit</span>
             <span class="tag">Python</span>
-            <span class="tag">Agentes de Código</span>
+            <span class="tag" data-i18n="tag_agents">Agentes de Código</span>
           </div>
         </div>
       </div>
@@ -399,7 +431,7 @@
       <div class="about-wrapper">
         <div class="about-text">
           <div class="badge-pill" style="margin-bottom: 1rem;">
-            <i class="fas fa-user-tie"></i> Software Architect
+            <i class="fas fa-user-tie"></i> <span data-i18n="about_badge">Software Architect</span>
           </div>
           <h3 data-i18n="about_title">Sobre André Costa</h3>
           <p data-i18n="about_p1">
@@ -417,22 +449,22 @@
           <div class="about-highlight-item">
             <div class="about-highlight-icon"><i class="fas fa-graduation-cap"></i></div>
             <div>
-              <h5>Pós-Graduação Especialização Lato Sensu</h5>
-              <p>Engenharia de Software para Dispositivos Móveis.</p>
+              <h5 data-i18n="about_h1_title">Pós-Graduação Especialização Lato Sensu</h5>
+              <p data-i18n="about_h1_desc">Engenharia de Software para Dispositivos Móveis.</p>
             </div>
           </div>
           <div class="about-highlight-item">
             <div class="about-highlight-icon"><i class="fas fa-shield-halved"></i></div>
             <div>
-              <h5>Filosofia Privacy-First</h5>
-              <p>Dados pertencem ao usuário: armazenamento local e zero venda de telemetria.</p>
+              <h5 data-i18n="about_h2_title">Filosofia Privacy-First</h5>
+              <p data-i18n="about_h2_desc">Dados pertencem ao usuário: armazenamento local e zero venda de telemetria.</p>
             </div>
           </div>
           <div class="about-highlight-item">
             <div class="about-highlight-icon"><i class="fas fa-code-commit"></i></div>
             <div>
-              <h5>Engenharia Baseada em Testes & CI</h5>
-              <p>Monorepos automatizados com esteiras de validação e releases consistentes.</p>
+              <h5 data-i18n="about_h3_title">Engenharia Baseada em Testes & CI</h5>
+              <p data-i18n="about_h3_desc">Monorepos automatizados com esteiras de validação e releases consistentes.</p>
             </div>
           </div>
         </div>

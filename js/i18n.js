@@ -12,6 +12,7 @@ const translations = {
     nav_about: "Sobre",
     nav_contact: "Contato",
     nav_play_store: "Google Play",
+    nav_install: "Instalar",
 
     // Hero
     hero_badge: "Estúdio Independente de Software & Arquitetura",
@@ -101,6 +102,16 @@ const translations = {
     stack_ai: "DevOps & IA",
 
     // About Section
+    about_badge: "Arquiteto de Software",
+    about_h1_title: "Pós-Graduação Especialização Lato Sensu",
+    about_h1_desc: "Engenharia de Software para Dispositivos Móveis.",
+    about_h2_title: "Filosofia Privacy-First",
+    about_h2_desc: "Dados pertencem ao usuário: armazenamento local e zero venda de telemetria.",
+    about_h3_title: "Engenharia Baseada em Testes & CI",
+    about_h3_desc: "Monorepos automatizados com esteiras de validação e releases consistentes.",
+    tag_retail: "Automação Comercial",
+    tag_hubs: "Concentradores",
+    tag_agents: "Agentes de Código",
     about_title: "Sobre André Costa",
     about_p1: "Arquiteto de Soluções e Desenvolvedor Sênior com trajetória iniciada no ano 2000. Especialista em construir sistemas corporativos de grande porte em Delphi e PHP/Laravel, além de ecossistemas mobile modernos em Flutter.",
     about_p2: "Pós-graduado em Engenharia de Software para Dispositivos Móveis. Acredito em software artesanal de alta qualidade: ferramentas rápidas, sem bloatware, com código testado e total respeito à privacidade do usuário.",
@@ -134,6 +145,7 @@ const translations = {
     nav_about: "About",
     nav_contact: "Contact",
     nav_play_store: "Google Play",
+    nav_install: "Install",
 
     // Hero
     hero_badge: "Independent Software & Architecture Studio",
@@ -223,6 +235,16 @@ const translations = {
     stack_ai: "DevOps & AI Tooling",
 
     // About Section
+    about_badge: "Software Architect",
+    about_h1_title: "Postgraduate Specialization",
+    about_h1_desc: "Software Engineering for Mobile Devices.",
+    about_h2_title: "Privacy-First Philosophy",
+    about_h2_desc: "Data belongs to the user: local storage and zero telemetry resale.",
+    about_h3_title: "Test-Driven Engineering & CI",
+    about_h3_desc: "Automated monorepos with validation pipelines and consistent releases.",
+    tag_retail: "Retail Automation",
+    tag_hubs: "Fiscal Hubs",
+    tag_agents: "Coding Agents",
     about_title: "About André Costa",
     about_p1: "Solutions Architect and Senior Software Engineer with a career spanning over 25 years. Specialist in high-scale corporate software with Delphi and PHP/Laravel, alongside modern Flutter mobile architectures.",
     about_p2: "Postgraduate in Software Engineering for Mobile Devices. I believe in handcrafted, high-quality software: fast utilities, zero bloatware, tested codebases, and deep respect for user privacy.",

@@ -773,6 +773,10 @@ textarea.form-control {
   .nav-links.open {
     display: flex;
   }
+  /* Header estreito: botão da Play Store só com ícone */
+  .nav-play-label {
+    display: none;
+  }
   .hero-title {
     font-size: 2rem;
   }
@@ -796,4 +800,9 @@ textarea.form-control {
   .form-row {
     grid-template-columns: 1fr;
   }
+}
+
+/* PWA: botão de instalação só aparece quando o navegador oferece */
+.install-btn[hidden] {
+  display: none;
 }

@@ -4,13 +4,15 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // --- 1. i18n Language Management ---
-  const savedLang = localStorage.getItem("allc_lang");
+  // Storage pode lançar exceção em navegação privada restrita
+  let savedLang = null;
+  try { savedLang = localStorage.getItem("allc_lang"); } catch (e) {}
   let currentLang = savedLang || (navigator.language && navigator.language.startsWith("pt") ? "pt" : "en");
 
   function setLanguage(lang) {
     if (!translations[lang]) lang = "en";
     currentLang = lang;
-    localStorage.setItem("allc_lang", lang);
+    try { localStorage.setItem("allc_lang", lang); } catch (e) {}
 
     // Update HTML lang attribute
     document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
@@ -43,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial language setup
   setLanguage(currentLang);
+  document.documentElement.classList.remove("i18n-pending");
 
   // --- 2. Mobile Navigation Toggle ---
   const mobileToggle = document.querySelector(".mobile-toggle");
@@ -108,4 +111,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const encoded = encodeURIComponent(text);
     window.open(`https://api.whatsapp.com/send?phone=5512988543055&text=${encoded}`, "_blank");
   };
+
+  // --- 5. PWA: Service Worker & Install Prompt ---
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  }
+
+  const installBtn = document.querySelector(".install-btn");
+  let deferredPrompt = null;
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) installBtn.hidden = false;
+  });
+
+  if (installBtn) {
+    installBtn.addEventListener("click", async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.hidden = true;
+    });
+  }
+
+  window.addEventListener("appinstalled", () => {
+    if (installBtn) installBtn.hidden = true;
+  });
 });
