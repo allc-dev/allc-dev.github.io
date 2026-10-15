@@ -73,9 +73,9 @@ window.enviarEmail = function enviarEmail() {
         `Email: ${email}\n` +
         `Assunto: ${assunto}\n\n` +
         `Mensagem:\n${mensagem}\n\n` +
-        `--\nEnviado através do site andrellopes.github.io`
+        `--\nEnviado através do site allc-dev.github.io`
     );
-    window.location.href = `mailto:allc.dev@hotmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:allc.dev@outlook.com?subject=${subject}&body=${body}`;
 }
 
 window.enviarWhatsApp = function enviarWhatsApp() {
