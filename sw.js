@@ -1,16 +1,14 @@
 // Cache do PWA: identidade Jade e catálogo disponível sem rede após instalação.
-const CACHE_VERSION = 'allc-studio-v5';
+const CACHE_VERSION = 'allc-clean-v6';
 const PRECACHE = [
   "/",
   "/index.html",
   "/privacy-policy.html",
-  "/css/modern.css",
-  "/js/i18n.js",
-  "/js/main.js",
+  "/css/modern.css?v=clean-v6",
+  "/js/i18n.js?v=clean-v6",
+  "/js/main.js?v=clean-v6",
   "/site.webmanifest",
   "/imagens/brand/studio.webp",
-  "/imagens/brand/chesstime.png",
-  "/imagens/brand/multicounter.png",
   "/imagens/favicon-32x32.png",
   "/imagens/android-chrome-192x192.png",
   "/imagens/android-chrome-512x512.png",

@@ -35,8 +35,12 @@ GitHub Pages publica master; commit/push somente com ordem do allc.
 ## Atualização visual e PWA — 16/10/2026
 
 Cena Jade aprovada do YouTube em imagens/brand/studio.webp, hero responsivo e
-destaques com campanhas reais. Botão Instalar na home e rodapés: usa o prompt
+catálogo único dos aplicativos. Botão Instalar na home e rodapés: usa o prompt
 nativo quando disponível; nos demais navegadores, mostra instruções, incluindo
 Safari/iOS. Em standalone os botões são ocultados. Sem instalação automática.
-Cache studio-v5 inclui catálogo, ícones e páginas dos 11 apps; imagens de
+Cache clean-v6 inclui catálogo, ícones e páginas dos 11 apps; imagens de
 produto visitadas entram no cache em execução. WhatsApp e PT/EN preservados.
+
+CSS e JS usam ?v=clean-v6 para evitar HTML novo com estáticos antigos.
+Canais externos aparecem só na seção de contato; não há link externo para
+a própria home. Catálogo único; PWA, WhatsApp e idioma PT/EN preservados.
