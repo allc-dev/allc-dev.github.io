@@ -1,5 +1,5 @@
 // Service worker do allc.dev: shell offline, estratégias por tipo de recurso e cache com limite.
-const VERSION = 'everyday-v10-bookquest';
+const VERSION = 'everyday-v10-biblia';
 const PRECACHE_NAME = `allc-precache-${VERSION}`;
 const PAGES_NAME = `allc-pages-${VERSION}`;
 const ASSETS_NAME = `allc-assets-${VERSION}`;
