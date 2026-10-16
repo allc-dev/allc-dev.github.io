@@ -1,5 +1,5 @@
 // Cache do PWA: identidade Jade e catálogo disponível sem rede após instalação.
-const CACHE_VERSION = 'allc-everyday-v9';
+const CACHE_VERSION = 'allc-bookquest-v10';
 const PRECACHE = [
   "/",
   "/index.html",
