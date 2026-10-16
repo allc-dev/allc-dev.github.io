@@ -48,5 +48,30 @@
   document.querySelector('[data-close-install]')?.addEventListener('click', () => installDialog.close());
   window.addEventListener('appinstalled', () => { deferredInstall = null; installButtons.forEach(button => { button.hidden = true; }); });
   refreshInstallButtons();
-  if ('serviceWorker' in navigator && ['http:', 'https:'].includes(location.protocol)) navigator.serviceWorker.register('/sw.js').catch(() => {});
+  // Atualização do PWA: a nova versão só assume após o aceite, evitando trocar arquivos no meio da navegação.
+  if ('serviceWorker' in navigator && ['http:', 'https:'].includes(location.protocol)) {
+    const lang = () => (document.documentElement.lang.startsWith('pt') ? 'pt' : 'en');
+    let reloading = false;
+    function showUpdate(worker) {
+      if (document.querySelector('.update-toast')) return;
+      const copy = translations[lang()];
+      const toast = document.createElement('div');
+      toast.className = 'update-toast'; toast.setAttribute('role', 'status');
+      const text = document.createElement('span'); text.textContent = copy.update_ready;
+      const action = document.createElement('button'); action.type = 'button'; action.textContent = copy.update_reload;
+      action.addEventListener('click', () => { action.disabled = true; worker.postMessage({ type: 'SKIP_WAITING' }); });
+      toast.append(text, action); document.body.append(toast);
+    }
+    function track(worker) {
+      worker.addEventListener('statechange', () => { if (worker.state === 'installed' && navigator.serviceWorker.controller) showUpdate(worker); });
+    }
+    navigator.serviceWorker.addEventListener('controllerchange', () => { if (!reloading) { reloading = true; location.reload(); } });
+    navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).then(registration => {
+      if (registration.waiting && navigator.serviceWorker.controller) showUpdate(registration.waiting);
+      if (registration.installing) track(registration.installing);
+      registration.addEventListener('updatefound', () => track(registration.installing));
+      // PWA instalado pode ficar dias aberto em segundo plano: verifica ao voltar para o app.
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') registration.update().catch(() => {}); });
+    }).catch(() => {});
+  }
 })();
