@@ -32,5 +32,21 @@
   });
   navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
   document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeMenu(); } });
+  // A instalação só é solicitada por um clique do visitante.
+  let deferredInstall = null;
+  const installButtons = [...document.querySelectorAll('.install-btn')];
+  const installDialog = document.querySelector('#install-dialog');
+  const installed = () => window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  function refreshInstallButtons() { installButtons.forEach(button => { button.hidden = installed(); }); }
+  window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); deferredInstall = event; refreshInstallButtons(); });
+  installButtons.forEach(button => button.addEventListener('click', async () => {
+    if (deferredInstall) {
+      const prompt = deferredInstall; deferredInstall = null;
+      await prompt.prompt(); await prompt.userChoice;
+    } else if (installDialog && !installDialog.open) { installDialog.showModal(); }
+  }));
+  document.querySelector('[data-close-install]')?.addEventListener('click', () => installDialog.close());
+  window.addEventListener('appinstalled', () => { deferredInstall = null; installButtons.forEach(button => { button.hidden = true; }); });
+  refreshInstallButtons();
   if ('serviceWorker' in navigator && ['http:', 'https:'].includes(location.protocol)) navigator.serviceWorker.register('/sw.js').catch(() => {});
 })();

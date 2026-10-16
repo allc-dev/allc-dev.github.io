@@ -58,7 +58,15 @@ const translations = {
     "app_nexus": "Small challenges for memory, attention and logic.",
     "app_biblia": "Read, highlight and make time for the Bible.",
     "app_bookquest": "A daily Bible quiz, with reading along the way.",
-    "whatsapp_role": "Talk directly with André"
+    "whatsapp_role": "Talk directly with André",
+    "featured_label": "A closer look",
+    "featured_title": "Small tools. Real possibilities.",
+    "featured_intro": "See what these apps can do, from your next chess game to your everyday counts.",
+    "install": "Install allc.dev",
+    "install_title": "Keep allc.dev close",
+    "install_body": "Open your browser menu and choose Install app or Add to Home Screen. On iPhone or iPad, open this site in Safari, tap Share, then Add to Home Screen.",
+    "close": "Close",
+    "scene": "Chess, counting, focus and reading: the allc.dev family of apps."
   },
   "pt": {
     "nav_apps": "Aplicativos",
@@ -118,6 +126,14 @@ const translations = {
     "app_nexus": "Pequenos desafios de memória, atenção e lógica.",
     "app_biblia": "Leia, marque e reserve um tempo para a Bíblia.",
     "app_bookquest": "Um quiz bíblico diário, com leitura pelo caminho.",
-    "whatsapp_role": "Converse diretamente com o André"
+    "whatsapp_role": "Converse diretamente com o André",
+    "featured_label": "Veja mais de perto",
+    "featured_title": "Pequenas ferramentas. Muitas possibilidades.",
+    "featured_intro": "Da próxima partida de xadrez às contagens do dia a dia, conheça o que os apps podem fazer.",
+    "install": "Instalar allc.dev",
+    "install_title": "Tenha a allc.dev por perto",
+    "install_body": "Abra o menu do navegador e escolha Instalar aplicativo ou Adicionar à tela inicial. No iPhone ou iPad, abra este site no Safari, toque em Compartilhar e depois em Adicionar à Tela de Início.",
+    "close": "Fechar",
+    "scene": "Xadrez, contagem, foco e leitura: a família de apps allc.dev."
   }
 };
