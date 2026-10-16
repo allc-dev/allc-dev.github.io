@@ -11,7 +11,7 @@
   "icons": [
     {
       "src": "imagens/android-chrome-192x192.png",
-      "sizes": "192x192",
+      "sizes": "512x512", "type": "image/png",
       "type": "image/png",
       "purpose": "any"
     },
@@ -26,6 +26,76 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "lang": "en",
+  "dir": "ltr",
+  "orientation": "any",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "categories": [
+    "productivity",
+    "utilities",
+    "lifestyle"
+  ],
+  "screenshots": [
+    {
+      "src": "imagens/pwa/screenshot-narrow.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "allc.dev on a phone"
+    },
+    {
+      "src": "imagens/pwa/screenshot-wide.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "allc.dev on a desktop"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Bíblia",
+      "url": "/apps/biblia/",
+      "icons": [
+        {
+          "src": "imagens/apps/biblia.png",
+          "sizes": "512x512", "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "ChessTime",
+      "url": "/apps/chesstime/",
+      "icons": [
+        {
+          "src": "imagens/apps/chesstime.png",
+          "sizes": "512x512", "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Focodoro",
+      "url": "/apps/focodoro/",
+      "icons": [
+        {
+          "src": "imagens/apps/focodoro.png",
+          "sizes": "512x512", "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Habitus",
+      "url": "/apps/habitus/",
+      "icons": [
+        {
+          "src": "imagens/apps/habitus.png",
+          "sizes": "512x512", "type": "image/png"
+        }
+      ]
     }
   ]
 }
