@@ -38,5 +38,5 @@ Cena Jade aprovada do YouTube em imagens/brand/studio.webp, hero responsivo e
 destaques com campanhas reais. Botão Instalar na home e rodapés: usa o prompt
 nativo quando disponível; nos demais navegadores, mostra instruções, incluindo
 Safari/iOS. Em standalone os botões são ocultados. Sem instalação automática.
-Cache studio-v4 inclui catálogo, ícones e páginas dos 11 apps; imagens de
+Cache studio-v5 inclui catálogo, ícones e páginas dos 11 apps; imagens de
 produto visitadas entram no cache em execução. WhatsApp e PT/EN preservados.
