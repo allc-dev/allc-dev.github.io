@@ -1,5 +1,5 @@
 // Service worker do allc.dev: shell offline, estratégias por tipo de recurso e cache com limite.
-const VERSION = 'everyday-v10-exactime';
+const VERSION = 'everyday-v10-quietude';
 const PRECACHE_NAME = `allc-precache-${VERSION}`;
 const PAGES_NAME = `allc-pages-${VERSION}`;
 const ASSETS_NAME = `allc-assets-${VERSION}`;
@@ -41,6 +41,9 @@ const PRECACHE = [
   "/imagens/apps/petlog.png",
   "/apps/quietude/",
   "/imagens/apps/quietude.png",
+  "/imagens/apps/quietude-1.webp",
+  "/imagens/apps/quietude-2.webp",
+  "/imagens/apps/quietude-3.webp",
   "/apps/serena/",
   "/imagens/apps/serena.png",
   "/imagens/apple-touch-icon.png",
