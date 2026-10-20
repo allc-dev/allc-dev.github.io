@@ -1,5 +1,5 @@
 // Service worker do allc.dev: shell offline, estratégias por tipo de recurso e cache com limite.
-const VERSION = 'everyday-v10-quietude';
+const VERSION = 'everyday-v11-quietude';
 const PRECACHE_NAME = `allc-precache-${VERSION}`;
 const PAGES_NAME = `allc-pages-${VERSION}`;
 const ASSETS_NAME = `allc-assets-${VERSION}`;
@@ -13,9 +13,9 @@ const NEVER_CACHE = [/^\/imagens\/brand\/social\./, /^\/sw\.js$/, /^\/google[0-9
 const PRECACHE = [
   "/",
   "/privacy-policy.html",
-  "/css/modern.css?v=everyday-v10",
-  "/js/i18n.js?v=everyday-v10",
-  "/js/main.js?v=everyday-v10",
+  "/css/modern.css?v=everyday-v11",
+  "/js/i18n.js?v=everyday-v11",
+  "/js/main.js?v=everyday-v11",
   "/site.webmanifest",
   "/imagens/brand/studio.webp",
   "/imagens/favicon-32x32.png",

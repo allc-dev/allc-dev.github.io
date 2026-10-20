@@ -22,3 +22,5 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
 @media(display-mode:standalone){body{overscroll-behavior-y:none}.install-btn{display:none!important}}
 .update-toast{position:fixed;z-index:50;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:14px;width:max-content;max-width:calc(100% - 32px);padding:10px 10px 10px 18px;border-radius:28px;background:var(--dark);color:#fff;font-size:14px;box-shadow:0 10px 30px #0004}
 .update-toast button{min-height:44px;padding:0 18px;border:0;border-radius:22px;background:var(--bg);color:var(--dark);font-weight:700}
+.card-links{display:flex;flex-wrap:wrap;gap:4px 18px}
+.app-card .store-link{color:var(--muted)}
